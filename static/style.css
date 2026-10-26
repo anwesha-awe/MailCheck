@@ -1,4 +1,16 @@
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #0d0d0d;
+    --card: #1b1b1b;
+    --gold: #d9b76a;
+    --gold-hover: #f0cd80;
+    --text: #f5f0e6;
+    --muted: #aaa397;
+    --border: #3a352b;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,118 +18,150 @@
 }
 
 body {
-    background: #0b1120;
-    color: #f1f5f9;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(
+        ellipse at top,
+        #211d16 0%,
+        #0d0d0d 55%
+    );
+    color: var(--text);
+    font-family: 'DM Sans', Arial, sans-serif;
     min-height: 100vh;
 }
 
 .container {
     max-width: 1050px;
     margin: auto;
-    padding: 30px 20px;
+    padding: 32px 22px;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #1e293b;
+    gap: 16px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    font-size: 25px;
+    color: var(--gold);
+    font-size: 27px;
     font-weight: 800;
-    color: #60a5fa;
+    letter-spacing: -1px;
 }
 
 .tag {
-    background: #1e293b;
-    color: #94a3b8;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 12px;
+    color: var(--gold);
+    background: #29251c;
+    border: 1px solid #4d412b;
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .hero {
     text-align: center;
-    padding: 65px 0 45px;
+    padding: 75px 0 50px;
 }
 
 .hero h1 {
-    font-size: clamp(30px, 5vw, 48px);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
     margin-bottom: 18px;
 }
 
 .hero h1 span {
-    color: #3b82f6;
+    color: var(--gold);
 }
 
 .hero p {
-    color: #94a3b8;
-    line-height: 1.7;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 15px;
 }
 
 .card {
-    background: #151f32;
-    border: 1px solid #29364c;
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 26px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.18);
 }
 
 .section-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 22px;
 }
 
 .section-title h2 {
-    font-size: 19px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .section-title span {
-    color: #94a3b8;
-    font-size: 13px;
+    color: var(--muted);
+    font-size: 12px;
 }
 
 textarea {
     width: 100%;
-    height: 180px;
-    padding: 18px;
-    background: #0b1120;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    color: white;
-    font-size: 15px;
-    line-height: 1.8;
-    resize: vertical;
+    min-height: 180px;
+    padding: 20px;
+    background: #111111;
+    color: var(--text);
+    border: 1px solid #494136;
+    border-radius: 12px;
     outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.9;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+textarea::placeholder {
+    color: #8d867b;
 }
 
 textarea:focus {
-    border-color: #3b82f6;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(217,183,106,0.12);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--gold) !important;
+    cursor: pointer;
 }
 
 button {
-    background: #2563eb;
-    color: white;
+    background: var(--gold);
+    color: #17140e;
     border: none;
-    border-radius: 9px;
-    padding: 14px 25px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 10px;
+    padding: 15px 28px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
     cursor: pointer;
-    margin-top: 18px;
-    transition: 0.2s;
+    margin-top: 20px;
+    transition: background 0.2s, transform 0.2s;
 }
 
 button:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+button:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
 }
 
 .table-wrapper {
@@ -131,85 +175,103 @@ table {
 }
 
 th, td {
-    padding: 17px 12px;
-    border-bottom: 1px solid #29364c;
-    font-size: 14px;
+    padding: 19px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
 }
 
 th {
-    color: #94a3b8;
-    font-weight: 500;
+    color: var(--gold);
+    font-weight: 600;
 }
 
 td {
+    color: #e8e0d4;
     overflow-wrap: anywhere;
+}
+
+tbody tr:hover {
+    background: #25221d;
 }
 
 .badge {
     display: inline-block;
-    padding: 7px 12px;
-    border-radius: 20px;
+    padding: 8px 13px;
+    border-radius: 30px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
 }
 
-.bounce {
-    background: #451a23;
-    color: #fda4af;
+.delivered {
+    background: #173b2b;
+    color: #8df0ae;
 }
 
-.delivered {
-    background: #123b30;
-    color: #86efac;
+.bounce {
+    background: #461e24;
+    color: #ff9da6;
 }
 
 .unknown {
-    background: #493719;
-    color: #fcd34d;
+    background: #493819;
+    color: #f5d17c;
 }
 
 .info {
-    background: #111c2d;
-    border: 1px solid #29364c;
-    border-radius: 14px;
-    padding: 25px;
-    margin-top: 30px;
+    background: #181715;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 32px;
 }
 
 .info h3 {
-    margin-bottom: 14px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-size: 19px;
 }
 
 .info p {
-    color: #94a3b8;
-    line-height: 1.8;
+    color: var(--muted);
+    line-height: 1.9;
     margin-bottom: 8px;
     font-size: 14px;
 }
 
 footer {
     text-align: center;
-    color: #64748b;
-    font-size: 13px;
-    padding: 40px 0 10px;
+    color: #928a7c;
+    font-size: 12px;
+    padding: 45px 0 15px;
 }
 
 @media (max-width: 600px) {
+    .container {
+        padding: 20px 14px;
+    }
+
     header {
-        gap: 12px;
         flex-wrap: wrap;
     }
 
     .hero {
-        padding: 40px 0 30px;
+        padding: 45px 0 35px;
     }
 
     .card {
-        padding: 18px;
+        padding: 20px 16px;
+    }
+
+    .section-title {
+        flex-wrap: wrap;
     }
 
     button {
         width: 100%;
+    }
+
+    th, td {
+        padding: 14px 10px;
     }
 }

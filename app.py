@@ -101,28 +101,60 @@ def check_email(email):
         return "Unknown", "Verification could not be completed"
 
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     results = []
     emails_text = ""
+    demo_mode = False
 
     if request.method == "POST":
         emails_text = request.form.get("emails", "")
+        demo_mode = request.form.get("demo_mode") == "on"
+
         emails = re.split(r"[\s,;]+", emails_text.strip())
 
         for email in emails[:100]:
-            if email:
+            if not email:
+                continue
+
+            if demo_mode:
+                demo_results = {
+                    "delivered@demo.example": (
+                        "Likely Delivered",
+                        "SIMULATED: Test server accepted recipient"
+                    ),
+                    "bounce@demo.example": (
+                        "Likely Bounce",
+                        "SIMULATED: Test server rejected recipient"
+                    ),
+                    "unknown@demo.example": (
+                        "Unknown",
+                        "SIMULATED: Test server could not verify recipient"
+                    )
+                }
+
+                status, reason = demo_results.get(
+                    email.lower(),
+                    (
+                        "Unknown",
+                        "SIMULATED: No predefined result for this address"
+                    )
+                )
+            else:
                 status, reason = check_email(email)
-                results.append({
-                    "email": email,
-                    "status": status,
-                    "reason": reason
-                })
+
+            results.append({
+                "email": email,
+                "status": status,
+                "reason": reason
+            })
 
     return render_template(
         "index.html",
         results=results,
-        emails_text=emails_text
+        emails_text=emails_text,
+        demo_mode=demo_mode
     )
 
 

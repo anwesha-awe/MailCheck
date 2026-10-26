@@ -27,20 +27,45 @@
             <span>Up to 100 emails</span>
         </div>
 
-        <form method="POST">
-            <textarea name="emails" required
-                placeholder="Enter email addresses separated by commas, spaces, or new lines...">{{ emails_text }}</textarea>
+        
 
-            <button type="submit">Check Deliverability →</button>
-        </form>
+<form method="POST">
+    <textarea name="emails" required
+        placeholder="Enter email addresses separated by commas, spaces, or new lines...">{{ emails_text }}</textarea>
+
+    <div style="margin-top: 20px;">
+        <label style="color: white; display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" name="demo_mode"
+                   {% if demo_mode %}checked{% endif %}
+                   style="width: 18px; height: 18px;">
+
+            Enable Demo Mode (Simulated Results)
+        </label>
+    </div>
+
+    <p style="color: #94a3b8; font-size: 12px; margin-top: 10px;">
+        Demo Mode demonstrates all three classifications
+        using simulated results. No real mailboxes are verified.
+    </p>
+
+    <button type="submit">Check Deliverability →</button>
+</form>
+
     </section>
 
-    {% if results %}
-    <section class="card results">
-        <div class="section-title">
-            <h2>Verification Results</h2>
-            <span>{{ results|length }} checked</span>
-        </div>
+    
+{% if results %}
+<section class="card results">
+    <div class="section-title">
+        <h2>Verification Results</h2>
+        <span>{{ results|length }} checked</span>
+    </div>
+
+    {% if demo_mode %}
+    <p style="color: #fcd34d; margin-bottom: 18px; font-weight: bold;">
+        DEMO RESULTS — SIMULATED, NOT REAL EMAIL VERIFICATION
+    </p>
+    {% endif %}
 
         <div class="table-wrapper">
             <table>
