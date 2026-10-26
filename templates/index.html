@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MailCheck | Email Deliverability Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">✉ MailCheck</div>
+        <span class="tag">Email Verification Tool</span>
+    </header>
+
+    <section class="hero">
+        <h1>Check Email <span>Deliverability.</span></h1>
+        <p>Validate multiple email addresses instantly using
+        syntax and mail server DNS checks.</p>
+    </section>
+
+    <section class="card">
+        <div class="section-title">
+            <h2>Email Addresses</h2>
+            <span>Up to 100 emails</span>
+        </div>
+
+        <form method="POST">
+            <textarea name="emails" required
+                placeholder="Enter email addresses separated by commas, spaces, or new lines...">{{ emails_text }}</textarea>
+
+            <button type="submit">Check Deliverability →</button>
+        </form>
+    </section>
+
+    {% if results %}
+    <section class="card results">
+        <div class="section-title">
+            <h2>Verification Results</h2>
+            <span>{{ results|length }} checked</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email Address</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.email }}</td>
+                        <td>
+                            {% if result.status == "Likely Bounce" %}
+                                <span class="badge bounce">Likely Bounce</span>
+                            {% elif result.status == "Likely Delivered" %}
+                                <span class="badge delivered">Likely Delivered</span>
+                            {% else %}
+                                <span class="badge unknown">Unknown</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ result.reason }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    {% endif %}
+
+    <div class="info">
+        <h3>How does MailCheck work?</h3>
+        <p>MailCheck validates email syntax and checks DNS records
+        to determine whether a domain can receive email.</p>
+        <p>Mailbox existence cannot always be confirmed.
+        Inconclusive checks are marked as Unknown.</p>
+        <p>No emails are sent during verification.</p>
+    </div>
+
+    <footer>
+        <p>MailCheck © 2026 | Built with Python & Flask</p>
+    </footer>
+</div>
+
+</body>
+</html>
